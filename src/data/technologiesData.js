@@ -1,0 +1,16 @@
+export const technologiesData = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'Vue',
+  'Angular',
+  'Node.js',
+  'Python',
+  'Go',
+  'Rust',
+  'Java',
+  'SQL',
+  'NoSQL',
+  'Docker',
+  'Kubernetes',
+];
