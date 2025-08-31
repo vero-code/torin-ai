@@ -4,6 +4,7 @@ import FeatureSection from "./components/FeatureSection.jsx";
 import FooterSection from "./components/FooterSection.jsx";
 import HeaderSection from "./components/HeaderSection.jsx";
 import CandidateSection from "./components/candidate/CandidateSection.jsx";
+import ChallengeSection from "./components/challenge/ChallengeSection.jsx";
 
 function App() {
   const [currentPage, setCurrentPage] = useState('hero');
@@ -12,12 +13,17 @@ function App() {
     setCurrentPage('candidate');
   };
 
+  const handleFindChallenge = () => {
+    setCurrentPage('challenge');
+  };
+
   return (
     <>
       <div className="bg-gray-900">
         <HeaderSection />
         {currentPage === 'hero' && <HeroSection onGetStarted={handleGetStartedClick} />}
-        {currentPage === 'candidate' && <CandidateSection />}
+        {currentPage === 'candidate' && <CandidateSection onFormSubmit={handleFindChallenge} />}
+        {currentPage === 'challenge' && <ChallengeSection />}
       </div>
 
       {currentPage === 'hero' && <FeatureSection />}

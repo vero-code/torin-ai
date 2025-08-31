@@ -1,6 +1,6 @@
-import FormSection from "./FormSection.jsx";
+import FormUI from "./FormUI.jsx";
 
-export default function CandidateSection() {
+export default function CandidateSection({ onFormSubmit }) {
 
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -21,7 +21,7 @@ export default function CandidateSection() {
           <h1 className="text-5xl font-semibold tracking-tight text-balance text-black sm:text-7xl">
             Profile Settings
           </h1>
-          <FormSection />
+          <FormUI onFormSubmit={onFormSubmit} />
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a href="/" className="text-sm/6 font-semibold text-white">
               Go back <span aria-hidden="true">→</span>

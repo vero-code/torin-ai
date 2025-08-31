@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import {technologiesData} from "../../data/technologiesData.js";
 
-export default function FormSection() {
+export default function FormUI({ onFormSubmit }) {
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
@@ -20,15 +20,18 @@ export default function FormSection() {
     },
 
     validate: {
-      firstName: (value) => (value.length < 2 ? 'The name must contain at least 2 letters' : null),
-      about: (value) => (value.length < 10 ? 'Tell us a little more about yourself' : null),
-      technologies: (value) => (value.length === 0 ? 'Please select at least one technology' : null),
+      // firstName: (value) => (value.length < 2 ? 'The name must contain at least 2 letters' : null),
+      // about: (value) => (value.length < 10 ? 'Tell us a little more about yourself' : null),
+      // technologies: (value) => (value.length === 0 ? 'Please select at least one technology' : null),
     },
   });
 
   return (
     <Box maw={440} mx="auto" mt="xl">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => {
+        console.log(values);
+        onFormSubmit();
+      })}>
         <TextInput
           label="Your name"
           placeholder="How should we address you?"
