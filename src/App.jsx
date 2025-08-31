@@ -1,9 +1,13 @@
-import './App.css'
+import HeroSection from "./components/HeroSection.jsx";
+import FeatureSection from "./components/FeatureSection.jsx";
+import FooterSection from "./components/FooterSection.jsx";
 
 function App() {
   return (
     <>
-      <h1>Torin AI</h1>
+      <HeroSection />
+      <FeatureSection />
+      <FooterSection />
     </>
   )
 }
