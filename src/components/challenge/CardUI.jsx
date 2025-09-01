@@ -1,7 +1,7 @@
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 import companyExampleLogo from '../../assets/company-example.png';
 
-export default function CardUI() {
+export default function CardUI({ onTakeChallenge }) {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -21,7 +21,7 @@ export default function CardUI() {
         We are a tech company, and we’re hiring a developer whose drive and mindset matter more than past titles.
       </Text>
 
-      <Button color="blue" fullWidth mt="md" radius="md">
+      <Button onClick={onTakeChallenge} color="blue" fullWidth mt="md" radius="md">
         Take a challenge
       </Button>
     </Card>

@@ -2,7 +2,7 @@ export default function FooterSection() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900">
+    <footer>
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <hr className="my-6 border-gray-700 sm:mx-auto lg:my-8"/>
         <div className="sm:flex sm:items-center sm:justify-between">
