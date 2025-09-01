@@ -2,6 +2,7 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import torinAiLogo from '../../assets/torin-ai-logo.png';
+import MinimalFooter from './MinimalFooter';
 
 const navigation = [
   { name: 'Talent Pool', to: '/employer/dashboard' },
@@ -11,7 +12,7 @@ const navigation = [
 
 export default function EmployerLayout() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <nav className="bg-white shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -50,11 +51,13 @@ export default function EmployerLayout() {
         </div>
       </nav>
 
-      <main>
+      <main className="flex-grow">
         <div className="mx-auto max-w-7xl py-8 sm:px-6 lg:px-8">
           <Outlet />
         </div>
       </main>
+
+      <MinimalFooter />
     </div>
   );
 }

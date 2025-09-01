@@ -67,7 +67,7 @@ export default function TalentPoolDashboard() {
             name="skill"
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             value={filters.skill}
-            onChange={(e) => setFilters({ ...filters.skill, skill: e.target.value })}
+            onChange={(e) => setFilters({ ...filters, skill: e.target.value })}
           >
             <option value="">All</option>
             <option value="Learning Speed">Learning Speed</option>
