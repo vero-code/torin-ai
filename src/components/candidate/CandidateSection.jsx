@@ -1,6 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import FormUI from "./FormUI.jsx";
 
-export default function CandidateSection({ onFormSubmit }) {
+export default function CandidateSection() {
+  const navigate = useNavigate();
+
+  const onFormSubmit = () => {
+    navigate('/challenge');
+  };
 
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">

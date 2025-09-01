@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
 import HeroSection from "./components/HeroSection.jsx";
 import FeatureSection from "./components/FeatureSection.jsx";
 import FooterSection from "./components/FooterSection.jsx";
@@ -7,36 +8,43 @@ import CandidateSection from "./components/candidate/CandidateSection.jsx";
 import ChallengeSection from "./components/challenge/ChallengeSection.jsx";
 import SandboxSection from "./components/sandbox/SandboxSection.jsx";
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('hero');
-
-  const handleGetStartedClick = () => {
-    setCurrentPage('candidate');
-  };
-
-  const handleFindChallenge = () => {
-    setCurrentPage('challenge');
-  };
-
-  const handleTakeChallenge = () => setCurrentPage('sandbox');
-
+function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
-      <HeaderSection onNavigate={setCurrentPage} />
-
+      <HeaderSection />
       <main className="flex-1">
-        {currentPage === 'hero' && <HeroSection onGetStarted={handleGetStartedClick} />}
-        {currentPage === 'features' && <FeatureSection />}
-        {currentPage === 'candidate' && <CandidateSection onFormSubmit={handleFindChallenge} />}
-        {currentPage === 'challenge' && <ChallengeSection onTakeChallenge={handleTakeChallenge} />}
-        {currentPage === 'sandbox' && <SandboxSection />}
+        <Outlet />
       </main>
-
       <div className="mt-auto">
         <FooterSection />
       </div>
     </div>
-  )
+  );
+}
+
+function HomePage() {
+  const navigate = useNavigate();
+  const handleGetStartedClick = () => navigate('/candidate');
+
+  return (
+    <>
+      <HeroSection onGetStarted={handleGetStartedClick} />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="features" element={<FeatureSection />} />
+        <Route path="sandbox" element={<SandboxSection />} />
+        <Route path="candidate" element={<CandidateSection />} />
+        <Route path="challenge" element={<ChallengeSection />} />
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;
