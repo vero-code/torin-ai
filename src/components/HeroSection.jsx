@@ -19,7 +19,7 @@ export default function HeroSection({ onGetStarted }) {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-400 ring-1 ring-white/10 hover:ring-white/20">
             Built for the 'Tech Innovation For Good 2025' Hackathon.{' '}
-            <a href="#" className="font-semibold text-indigo-400">
+            <a href="https://tech-innovation-for-good.devpost.com" className="font-semibold text-indigo-400">
               <span aria-hidden="true" className="absolute inset-0" />
               Read story <span aria-hidden="true">&rarr;</span>
             </a>
@@ -38,10 +38,10 @@ export default function HeroSection({ onGetStarted }) {
               onClick={onGetStarted}
               className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Get started
+              I’m a Developer
             </a>
             <a href="#" className="text-sm/6 font-semibold text-white">
-              How It Works <span aria-hidden="true">→</span>
+              I’m an Employer <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>

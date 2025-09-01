@@ -21,15 +21,20 @@ function App() {
   const handleTakeChallenge = () => setCurrentPage('sandbox');
 
   return (
-    <div className="bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       <HeaderSection onNavigate={setCurrentPage} />
-      {currentPage === 'hero' && <HeroSection onGetStarted={handleGetStartedClick} />}
-      {currentPage === 'candidate' && <CandidateSection onFormSubmit={handleFindChallenge} />}
-      {currentPage === 'challenge' && <ChallengeSection onTakeChallenge={handleTakeChallenge} />}
-      {currentPage === 'sandbox' && <SandboxSection />}
 
-      {currentPage === 'hero' && <FeatureSection />}
-      <FooterSection />
+      <main className="flex-1">
+        {currentPage === 'hero' && <HeroSection onGetStarted={handleGetStartedClick} />}
+        {currentPage === 'features' && <FeatureSection />}
+        {currentPage === 'candidate' && <CandidateSection onFormSubmit={handleFindChallenge} />}
+        {currentPage === 'challenge' && <ChallengeSection onTakeChallenge={handleTakeChallenge} />}
+        {currentPage === 'sandbox' && <SandboxSection />}
+      </main>
+
+      <div className="mt-auto">
+        <FooterSection />
+      </div>
     </div>
   )
 }

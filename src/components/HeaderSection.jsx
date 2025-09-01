@@ -9,7 +9,8 @@ export default function HeaderSection({ onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Product', onClick: () => onNavigate('hero') },
+    { name: 'Home', onClick: () => onNavigate('hero') },
+    { name: 'Features', onClick: () => onNavigate('features') },
     { name: 'Marketplace', href: '#' },
     { name: 'Company', href: '#' },
     { name: 'Sandbox', onClick: () => onNavigate('sandbox') },
@@ -89,15 +90,25 @@ export default function HeaderSection({ onNavigate }) {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-white/10">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                {navigation.map((item) =>
+                  item.onClick ? (
+                    <button
+                      key={item.name}
+                      onClick={item.onClick}
+                      className="text-sm font-semibold text-white hover:text-gray-300"
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="text-sm font-semibold text-white hover:text-gray-300"
+                    >
+                      {item.name}
+                    </a>
+                  )
+                )}
               </div>
               <div className="py-6">
                 <a
