@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Outlet, useNavigate } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import HeroSection from "./components/HeroSection.jsx";
 import FeatureSection from "./components/FeatureSection.jsx";
 import FooterSection from "./components/FooterSection.jsx";
@@ -7,6 +7,9 @@ import HeaderSection from "./components/HeaderSection.jsx";
 import CandidateSection from "./components/candidate/CandidateSection.jsx";
 import ChallengeSection from "./components/challenge/ChallengeSection.jsx";
 import SandboxSection from "./components/sandbox/SandboxSection.jsx";
+
+import EmployerLayout from './components/employer/EmployerLayout.jsx';
+import TalentPoolDashboard from './components/employer/TalentPoolDashboard.jsx';
 
 function MainLayout() {
   return (
@@ -23,12 +26,9 @@ function MainLayout() {
 }
 
 function HomePage() {
-  const navigate = useNavigate();
-  const handleGetStartedClick = () => navigate('/candidate');
-
   return (
     <>
-      <HeroSection onGetStarted={handleGetStartedClick} />
+      <HeroSection />
     </>
   );
 }
@@ -42,6 +42,10 @@ function App() {
         <Route path="sandbox" element={<SandboxSection />} />
         <Route path="candidate" element={<CandidateSection />} />
         <Route path="challenge" element={<ChallengeSection />} />
+      </Route>
+
+      <Route path="/employer" element={<EmployerLayout />}>
+        <Route path="dashboard" element={<TalentPoolDashboard />} />
       </Route>
     </Routes>
   );

@@ -1,6 +1,8 @@
-'use client'
+import { useNavigate } from 'react-router-dom';
 
-export default function HeroSection({ onGetStarted }) {
+export default function HeroSection() {
+  const navigate = useNavigate();
+
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8">
       <div
@@ -33,16 +35,18 @@ export default function HeroSection({ onGetStarted }) {
             Traditional hiring is broken. Torin AI measures a candidate's true potential by challenging them with new technologies. See how they think, learn, and solve problems in real-time.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
-              onClick={onGetStarted}
-              className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            <button
+              onClick={() => navigate('/candidate')}
+              className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
             >
-              I’m a Developer
-            </a>
-            <a href="#" className="text-sm/6 font-semibold text-white">
+              Start Challenge (for Candidates)
+            </button>
+            <button
+              onClick={() => navigate('/employer/dashboard')}
+              className="text-sm font-semibold leading-6 text-white"
+            >
               I’m an Employer <span aria-hidden="true">→</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
