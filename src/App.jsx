@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="bg-gray-900">
-      <HeaderSection />
+      <HeaderSection onNavigate={setCurrentPage} />
       {currentPage === 'hero' && <HeroSection onGetStarted={handleGetStartedClick} />}
       {currentPage === 'candidate' && <CandidateSection onFormSubmit={handleFindChallenge} />}
       {currentPage === 'challenge' && <ChallengeSection onTakeChallenge={handleTakeChallenge} />}

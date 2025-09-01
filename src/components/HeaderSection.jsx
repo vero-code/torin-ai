@@ -5,15 +5,15 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import torinAiLogo from '../assets/torin-ai-logo.png';
 
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-]
-
-export default function HeaderSection() {
+export default function HeaderSection({ onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const navigation = [
+    { name: 'Product', onClick: () => onNavigate('hero') },
+    { name: 'Marketplace', href: '#' },
+    { name: 'Company', href: '#' },
+    { name: 'Sandbox', onClick: () => onNavigate('sandbox') },
+  ]
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -39,11 +39,25 @@ export default function HeaderSection() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-sm/6 font-semibold text-white">
-              {item.name}
-            </a>
-          ))}
+          {navigation.map((item) =>
+            item.onClick ? (
+              <button
+                key={item.name}
+                onClick={item.onClick}
+                className="text-sm font-semibold text-white hover:text-gray-300"
+              >
+                {item.name}
+              </button>
+            ) : (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold text-white hover:text-gray-300"
+              >
+                {item.name}
+              </a>
+            )
+          )}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm/6 font-semibold text-white">
