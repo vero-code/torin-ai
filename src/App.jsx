@@ -11,6 +11,7 @@ import SandboxSection from "./components/sandbox/SandboxSection.jsx";
 import EmployerLayout from './components/employer/EmployerLayout.jsx';
 import TalentPoolDashboard from './components/employer/TalentPoolDashboard.jsx';
 import CandidateProfile from "./components/employer/CandidateProfile.jsx";
+import PlaceholderPage from "./components/PlaceholderPage.jsx";
 
 function MainLayout() {
   return (
@@ -43,11 +44,14 @@ function App() {
         <Route path="sandbox" element={<SandboxSection />} />
         <Route path="candidate" element={<CandidateSection />} />
         <Route path="challenge" element={<ChallengeSection />} />
+        <Route path="login" element={<PlaceholderPage title="Login / Registration" theme="dark" />} />
       </Route>
 
       <Route path="/employer" element={<EmployerLayout />}>
         <Route path="dashboard" element={<TalentPoolDashboard />} />
         <Route path="candidate/:candidateId" element={<CandidateProfile />} />
+        <Route path="post-challenge" element={<PlaceholderPage title="Post a Challenge" theme="light" />} />
+        <Route path="settings" element={<PlaceholderPage title="Settings" theme="light" />} />
       </Route>
     </Routes>
   );

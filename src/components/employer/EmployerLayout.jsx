@@ -1,6 +1,6 @@
 // src/components/employer/EmployerLayout.jsx
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import torinAiLogo from '../../assets/torin-ai-logo.png';
 import MinimalFooter from './MinimalFooter';
 
@@ -11,6 +11,13 @@ const navigation = [
 ];
 
 export default function EmployerLayout() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log('User logged out');
+    navigate('/');
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <nav className="bg-white shadow-sm">
@@ -42,6 +49,7 @@ export default function EmployerLayout() {
             <div className="hidden sm:ml-6 sm:flex sm:items-center">
               <button
                 type="button"
+                onClick={handleLogout}
                 className="ml-3 relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Log out
