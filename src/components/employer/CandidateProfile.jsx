@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Sandpack } from '@codesandbox/sandpack-react';
 import ReactMarkdown from 'react-markdown';
 import {Paper} from "@mantine/core";
+import ContactCandidateModal from './ContactCandidateModal';
 
 export default function CandidateProfile() {
   const { candidateId } = useParams();
@@ -113,6 +114,12 @@ export default function CandidateProfile() {
           </div>
         )}
       </div>
+
+      <ContactCandidateModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        candidate={candidateData}
+      />
     </div>
   );
 }
