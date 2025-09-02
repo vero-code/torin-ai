@@ -10,6 +10,7 @@ import SandboxSection from "./components/sandbox/SandboxSection.jsx";
 
 import EmployerLayout from './components/employer/EmployerLayout.jsx';
 import TalentPoolDashboard from './components/employer/TalentPoolDashboard.jsx';
+import CandidateProfile from "./components/employer/CandidateProfile.jsx";
 
 function MainLayout() {
   return (
@@ -46,6 +47,7 @@ function App() {
 
       <Route path="/employer" element={<EmployerLayout />}>
         <Route path="dashboard" element={<TalentPoolDashboard />} />
+        <Route path="candidate/:candidateId" element={<CandidateProfile />} />
       </Route>
     </Routes>
   );
