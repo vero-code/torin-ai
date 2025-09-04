@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function CandidateCard({ candidate }) {
   return (
-    <div className="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow duration-200">
+    <div className="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow duration-200 border border-gray-200">
       <div className="p-5">
         <div className="flex items-center">
           <div className="flex-shrink-0">

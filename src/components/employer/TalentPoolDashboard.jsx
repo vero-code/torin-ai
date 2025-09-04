@@ -1,6 +1,8 @@
-// src/components/employer/TalentPoolDashboard.jsx
 import React, { useState } from 'react';
 import CandidateCard from './CandidateCard';
+import { candidates } from "../../data/candidatesData.js";
+import { skillsData } from "../../data/skillsData.js";
+import { technologiesData } from '../../data/technologiesData';
 
 export default function TalentPoolDashboard() {
   const [filters, setFilters] = useState({
@@ -8,14 +10,6 @@ export default function TalentPoolDashboard() {
     minPotential: 7.0,
     skill: '',
   });
-
-  const candidates = [
-    { id: '735', challenge: 'Data Processing in JavaScript', tech: 'JavaScript', potential: 9.1, skills: ['Learning Speed', 'Code Quality'], score: 91 },
-    { id: '736', challenge: 'Building an API in Python', tech: 'Python', potential: 8.5, skills: ['AI Efficiency', 'Algorithms'], score: 85 },
-    { id: '737', challenge: 'Data Processing in JavaScript', tech: 'JavaScript', potential: 7.8, skills: ['Adaptability', 'Code Quality'], score: 78 },
-    { id: '738', challenge: 'UI Development in React', tech: 'React', potential: 9.5, skills: ['Learning Speed', 'UI/UX'], score: 95 },
-    { id: '739', challenge: 'Building an API in Python', tech: 'Python', potential: 7.2, skills: ['AI Efficiency'], score: 72 },
-  ];
 
   const filteredCandidates = candidates.filter(candidate => {
     return (
@@ -26,7 +20,7 @@ export default function TalentPoolDashboard() {
   }).sort((a, b) => b.potential - a.potential);
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg p-6">
+    <div className="bg-gray-50 shadow overflow-hidden sm:rounded-lg p-6">
       <h1 className="text-3xl font-extrabold text-gray-900 mb-6">Talent Pool</h1>
 
       {/* Filter section */}
@@ -36,14 +30,16 @@ export default function TalentPoolDashboard() {
           <select
             id="tech"
             name="tech"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             value={filters.tech}
             onChange={(e) => setFilters({ ...filters, tech: e.target.value })}
           >
             <option value="">All</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Python">Python</option>
-            <option value="React">React</option>
+            {technologiesData.map((tech) => (
+              <option key={tech.value} value={tech.label}>
+                {tech.label}
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -65,17 +61,16 @@ export default function TalentPoolDashboard() {
           <select
             id="skill"
             name="skill"
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
             value={filters.skill}
             onChange={(e) => setFilters({ ...filters, skill: e.target.value })}
           >
             <option value="">All</option>
-            <option value="Learning Speed">Learning Speed</option>
-            <option value="Code Quality">Code Quality</option>
-            <option value="AI Efficiency">AI Efficiency</option>
-            <option value="Adaptability">Adaptability</option>
-            <option value="Algorithms">Algorithms</option>
-            <option value="UI/UX">UI/UX</option>
+            {skillsData.map((skill) => (
+              <option key={skill.value} value={skill.value}>
+                {skill.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>
