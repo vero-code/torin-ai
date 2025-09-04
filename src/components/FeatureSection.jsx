@@ -1,4 +1,5 @@
-import { PuzzlePieceIcon, CpuChipIcon, ScaleIcon } from '@heroicons/react/20/solid'
+import { DocumentChartBarIcon } from '@heroicons/react/24/outline';
+import {CpuChipIcon, PuzzlePieceIcon, ScaleIcon} from "@heroicons/react/20/solid/index.js";
 
 const features = [
   {
@@ -17,42 +18,40 @@ const features = [
     description: 'By removing resumes from the equation, we reduce conscious and unconscious bias, ensuring that every talented individual gets a fair chance to shine.',
     icon: ScaleIcon,
   },
+  {
+    name: 'Actionable Potential Profile',
+    description: 'Receive a detailed, data-driven report for each candidate, visualizing their learning velocity, code quality, and problem-solving patterns for smarter hiring decisions.',
+    icon: DocumentChartBarIcon,
+  },
 ]
 
 export default function FeatureSection() {
   return (
-    <div className="overflow-hidden bg-gray-900 py-24 sm:py-32">
+    <div className="bg-gray-900 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-          <div className="lg:pt-4 lg:pr-8">
-            <div className="lg:max-w-lg">
-              <h2 className="text-base/7 font-semibold text-indigo-400">Hire Smarter</h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-                See Beyond the Resume
-              </p>
-              <p className="mt-6 text-lg/8 text-gray-300">
-                Our platform provides a dynamic 'Potential Profile' for every candidate. Instead of a static list of past jobs, you get a clear view of their learning velocity, problem-solving skills, and adaptability in action.
-              </p>
-              <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-gray-400 lg:max-w-none">
-                {features.map((feature) => (
-                  <div key={feature.name} className="relative pl-9">
-                    <dt className="inline font-semibold text-white">
-                      <feature.icon aria-hidden="true" className="absolute top-1 left-1 size-5 text-indigo-400" />
-                      {feature.name}
-                    </dt>{' '}
-                    <dd className="inline">{feature.description}</dd>
+        <div className="mx-auto max-w-2xl lg:text-center">
+          <h2 className="text-base/7 font-semibold text-indigo-400">Hire Smarter</h2>
+          <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl lg:text-balance">
+            See Beyond the Resume
+          </p>
+          <p className="mt-6 text-lg/8 text-gray-300">
+            Our platform provides a dynamic 'Potential Profile' for every candidate. Instead of a static list of past jobs, you get a clear view of their learning velocity, problem-solving skills, and adaptability in action.
+          </p>
+        </div>
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            {features.map((feature) => (
+              <div key={feature.name} className="relative pl-16">
+                <dt className="text-base/7 font-semibold text-white">
+                  <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-indigo-500">
+                    <feature.icon aria-hidden="true" className="size-6 text-white" />
                   </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-          <img
-            alt="Product screenshot"
-            src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
-            width={2432}
-            height={1442}
-            className="w-3xl max-w-none rounded-xl shadow-xl ring-1 ring-white/10 sm:w-228 md:-ml-4 lg:-ml-0"
-          />
+                  {feature.name}
+                </dt>
+                <dd className="mt-2 text-base/7 text-gray-400">{feature.description}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </div>

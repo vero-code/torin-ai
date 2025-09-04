@@ -1,17 +1,18 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import torinAiLogo from '../assets/torin-ai-logo.png';
 import { Link } from 'react-router-dom';
 
-export default function HeaderSection() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const navigation = [
+  { name: 'How It Works', to: '/features' },
+  { name: 'For Candidates', to: '/candidate' },
+  { name: 'For Employers', to: '/employer/dashboard' },
+  { name: 'Pricing', to: '/pricing' },
+]
 
-  const navigation = [
-    { name: 'Home', to: '/' },
-    { name: 'Features', to: '/features' },
-    { name: 'Sandbox', to: '/sandbox' },
-  ]
+export default function HeaderSection() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">

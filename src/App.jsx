@@ -45,6 +45,8 @@ function App() {
         <Route path="candidate" element={<CandidateSection />} />
         <Route path="challenge" element={<ChallengeSection />} />
         <Route path="login" element={<PlaceholderPage title="Login / Registration" theme="dark" />} />
+
+        <Route path="pricing" element={<PlaceholderPage title="Pricing" theme="dark" />} />
       </Route>
 
       <Route path="/employer" element={<EmployerLayout />}>
