@@ -1,17 +1,20 @@
-// Task: reverse the line
+// A given array of to-do items
+const todos = [
+  'Learn direct DOM manipulation',
+  'Build an awesome project',
+  'Get a job offer!',
+];
 
 /**
- * The function takes a string and should return it in reverse order.
- * @param {string} str - original line
- * @returns {string} - inverted line
+ * @param {string[]} todos - An array of strings with to-do items.
  */
-function reverseString(str) {
-  // TODO: implement the function
+function renderTodos(todos) {
+  // Find the <ul> container by its id.
+  const todoListContainer = document.getElementById('todo-list');
+
+  // ❗️ Write your solution here!
+
 }
 
-// Examples of use (should output reversed strings):
-console.log(reverseString("hello"));      // "olleh"
-console.log(reverseString("JavaScript")); // "tpircSavaJ"
-console.log(reverseString("12345"));      // "54321"
-
-// Try changing the arguments and see the result :)
+// Call your function to render the list
+renderTodos(todos);
