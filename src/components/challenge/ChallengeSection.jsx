@@ -1,5 +1,6 @@
 import { Box, Title, SimpleGrid } from '@mantine/core';
 import CardUI from "./CardUI.jsx";
+import {companiesData} from "../../data/companiesData.js";
 
 export default function ChallengeSection() {
   return (
@@ -8,11 +9,16 @@ export default function ChallengeSection() {
 
       <Box maw={1200} mx="auto" px="md">
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">
-          <CardUI />
-          <CardUI />
-          <CardUI />
-          <CardUI />
-          <CardUI />
+          {companiesData.map((company) => (
+            <CardUI
+              key={company.id}
+              name={company.name}
+              description={company.description}
+              logoSrc={company.logoSrc}
+              badgeText={company.badgeText}
+              badgeColor={company.badgeColor}
+            />
+          ))}
         </SimpleGrid>
       </Box>
     </Box>
