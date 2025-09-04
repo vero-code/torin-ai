@@ -5,7 +5,7 @@ import {companiesData} from "../../data/companiesData.js";
 export default function ChallengeSection() {
   return (
     <Box ta="center" py={100}>
-      <Title c="white" mb="xl">Here you will find your challenge</Title>
+      <Title c="white" mb="xl">Find Your Challenge</Title>
 
       <Box maw={1200} mx="auto" px="md">
         <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="lg">

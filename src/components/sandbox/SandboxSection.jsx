@@ -1,61 +1,80 @@
 import ReactMarkdown from "react-markdown";
-import { nightOwl } from "@codesandbox/sandpack-themes";
 import { Sandpack } from "@codesandbox/sandpack-react";
+import { useState, useEffect } from "react";
+import { Paper } from "@mantine/core";
+import { ChatBubble } from "../challenge/ChatBubble.jsx";
 
 import taskDescription from "../../challenges/task.md?raw";
 import indexJs from "../../challenges/index.js?raw";
-
-const customNightOwl = {
-  ...nightOwl,
-  colors: {
-    ...nightOwl.colors,
-    surface1: "#0f172a",
-    surface2: "#1e293b",
-    surface3: "#1e293b",
-  },
-};
-
-const indexHtml = `<!DOCTYPE html>
-<html>
-<head>
-  <title>To-Do List</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>My To-Do List</h1>
-  <ul id="todo-list"></ul>
-  <script src="index.js"></script>
-</body>
-</html>`;
-
-const stylesCss = `body {
-  background-color: #1e293b;
-  color: #e2e8f0;
-  font-family: sans-serif;
-  padding: 20px;
-}
-ul { padding-left: 20px; }
-li { margin-bottom: 8px; }`;
+import {customNightOwl, indexHtml, stylesCss, chatScript} from "../../data/sandboxData.js";
 
 export default function SandboxSection() {
+  const [visibleMessages, setVisibleMessages] = useState([]);
+
+  useEffect(() => {
+    setVisibleMessages([]);
+    const interval = setInterval(() => {
+      setVisibleMessages((current) => {
+        if (current.length < chatScript.length) {
+          return [...current, chatScript[current.length]];
+        }
+        clearInterval(interval);
+        return current;
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative overflow-hidden bg-gray-900">
-      <div className="relative mx-auto max-w-7xl px-6 pt-24 pb-16 sm:pt-32 sm:pb-24">
-        <h2 className="text-base/7 font-semibold text-indigo-400">
-          The Challenge Sandbox
-        </h2>
-        <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-          Task
-        </p>
-        <p className="mt-3 text-sm text-indigo-300/90">
-          💡 Read the task, edit <code className="rounded bg-white/10 px-1">index.js</code> and press
-          {" "}
-          <span className="font-semibold">Run</span>. You can also open the sandbox in a new tab.
-        </p>
-        <div className="mt-6 prose prose-invert max-w-3xl text-gray-200">
-          <ReactMarkdown>{taskDescription}</ReactMarkdown>
+      <div className="relative mx-auto max-w-7xl px-6 pt-24 sm:pt-32">
+        <h1 className="text-indigo-400 mt-2 text-4xl font-bold sm:text-5xl lg:text-center">The Challenge Page</h1>
+        <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2">
+          <Paper
+            shadow="md"
+            radius="lg"
+            p="lg"
+            withBorder
+            style={{ background: "rgba(30,41,59,0.6)", borderColor: "rgba(255,255,255,0.08)" }}
+            className="prose prose-invert max-w-none text-gray-200"
+          >
+            <ReactMarkdown>{taskDescription}</ReactMarkdown>
+            <p className="mt-3 text-sm text-indigo-300/90">
+              💡 Read the task, edit <code className="rounded bg-white/10 px-1">index.js</code> and press
+              {" "}
+              <span className="font-semibold">Run</span>. You can also open the sandbox in a new tab.
+              Use AI Assistant to help you.
+            </p>
+          </Paper>
+
+          <Paper
+            shadow="md"
+            radius="lg"
+            p="lg"
+            withBorder
+            style={{ background: "rgba(30,41,59,0.6)", borderColor: "rgba(255,255,255,0.08)" }}
+          >
+            <h3 className="text-lg font-semibold text-white">AI Assistant Hint</h3>
+            <div className="mt-4 h-80 overflow-y-auto rounded-md bg-slate-800/50 p-4 ring-1 ring-white/10">
+              {visibleMessages.map((msg, index) => (
+                <ChatBubble key={index} sender={msg.sender} message={msg.message} />
+              ))}
+            </div>
+          </Paper>
         </div>
-        <div className="mx-auto mt-10">
+
+        <Paper
+          shadow="xl"
+          radius="lg"
+          p="md"
+          withBorder
+          className="mx-auto mt-10"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(30,41,59,0.85) 0%, rgba(15,23,42,0.85) 100%)",
+            borderColor: "rgba(255,255,255,0.08)",
+          }}
+        >
           <div className="overflow-hidden rounded-lg ring-1 ring-white/10">
             <Sandpack
               template="vanilla"
@@ -77,7 +96,7 @@ export default function SandboxSection() {
               }}
             />
           </div>
-        </div>
+        </Paper>
       </div>
     </div>
   );
