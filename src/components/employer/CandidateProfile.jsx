@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Sandpack } from '@codesandbox/sandpack-react';
 import ReactMarkdown from 'react-markdown';
-import {Paper} from "@mantine/core";
+import { Paper, Progress, Text, Group, Divider } from "@mantine/core";
 import ContactCandidateModal from './ContactCandidateModal';
 
 export default function CandidateProfile() {
@@ -33,16 +33,13 @@ export default function CandidateProfile() {
   };
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg p-6">
-      <h1 className="text-3xl font-extrabold text-gray-900 mb-4">
-        Candidate Profile #{candidateData.id}
-      </h1>
-      <p className="text-xl text-gray-700 mb-6">Challenge: {candidateData.challengeTitle}</p>
-
-      <div className="border-b border-gray-200 pb-5 mb-6 flex justify-between items-center">
+    <div className="bg-gray-50 p-6 sm:rounded-lg">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <span className="text-sm font-medium text-gray-500">Potential Index:</span>{' '}
-          <span className="text-indigo-600 text-2xl font-bold">{candidateData.potential.toFixed(1)}/10</span>
+          <h1 className="text-3xl font-extrabold text-gray-900 mb-4">
+            Candidate Profile #{candidateData.id}
+          </h1>
+          <p className="text-xl text-gray-700 mb-6">Challenge: {candidateData.challengeTitle}</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
@@ -52,68 +49,102 @@ export default function CandidateProfile() {
         </button>
       </div>
 
-      <div className="mb-6 border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-          <button
-            onClick={() => setActiveTab('solution')}
-            className={`${
-              activeTab === 'solution'
-                ? 'border-indigo-500 text-indigo-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-          >
-            Solution
-          </button>
-          <button
-            onClick={() => setActiveTab('thoughtProcess')}
-            className={`${
-              activeTab === 'thoughtProcess'
-                ? 'border-indigo-500 text-indigo-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-          >
-            Train of Thoughts (AI assistant)
-          </button>
-        </nav>
-      </div>
+      <Paper withBorder p="xl" radius="md" mt="xl">
+        <div className="mb-6 border-b border-gray-200">
+          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+            <button
+              onClick={() => setActiveTab('solution')}
+              className={`${
+                activeTab === 'solution'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Solution
+            </button>
+            <button
+              onClick={() => setActiveTab('thoughtProcess')}
+              className={`${
+                activeTab === 'thoughtProcess'
+                  ? 'border-indigo-500 text-indigo-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            >
+              Train of Thoughts (AI assistant)
+            </button>
+          </nav>
+        </div>
 
-      <div>
-        {activeTab === 'solution' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          {activeTab === 'solution' && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">Problem Statement</h3>
+                <Paper withBorder p="md" radius="md" className="h-full">
+                  <ReactMarkdown>{candidateData.challengeDescription}</ReactMarkdown>
+                </Paper>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">Candidate's decision</h3>
+                <Sandpack
+                  template="vanilla"
+                  files={solutionFiles}
+                  theme="dark"
+                  options={{
+                    readOnly: true,
+                    editorHeight: '400px',
+                    showConsole: false,
+                    showNavigator: true,
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'thoughtProcess' && (
+            <Paper withBorder p="md" radius="md">
+              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">History of Interaction with AI Assistant</h3>
+              <div className="prose max-w-none">
+                <ReactMarkdown>{candidateData.thoughtProcessLog}</ReactMarkdown>
+              </div>
+            </Paper>
+          )}
+        </div>
+
+        <section id="assessment" aria-labelledby="assessment-title" className="mt-12">
+          <Divider
+            label="Overall assessment"
+            labelPosition="center"
+            className="mb-6"
+          />
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Performance Breakdown</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
-              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">Problem Statement</h3>
               <Paper withBorder p="md" radius="md" className="h-full">
-                <ReactMarkdown>{candidateData.challengeDescription}</ReactMarkdown>
+                <Text size="lg" fw={700} c="indigo">Potential Index</Text>
+                <Text size="sm" c="dimmed" mb="sm">Overall assessment</Text>
+                <Text size="3rem" fw={800} c="indigo">{candidateData.potential.toFixed(1)}<span className="text-xl text-gray-500">/10</span></Text>
               </Paper>
             </div>
-            <div>
-              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">Candidate's decision</h3>
-              <Sandpack
-                template="vanilla"
-                files={solutionFiles}
-                theme="dark"
-                options={{
-                  readOnly: true,
-                  editorHeight: '400px',
-                  showConsole: false,
-                  showNavigator: true,
-                }}
-              />
-            </div>
-          </div>
-        )}
+            {candidateData.skills.map((skill, index) => {
+              const [name, score] = skill.split(': ');
+              const [value, max] = score.split('/');
+              const percentage = (parseInt(value) / parseInt(max)) * 100;
 
-        {activeTab === 'thoughtProcess' && (
-          <div className="bg-gray-50 p-6 rounded-lg shadow-inner h-96 overflow-y-auto">
-            <h3 className="text-lg font-medium leading-6 text-gray-900 mb-3">History of Interaction with AI Assistant</h3>
-            <div className="prose max-w-none">
-              <ReactMarkdown>
-                {candidateData.thoughtProcessLog}
-              </ReactMarkdown>
-            </div>
+              return (
+                <Paper key={index} withBorder p="md" radius="md" className="h-full">
+                  <Text size="lg" fw={700}>{name}</Text>
+                  <Group justify="space-between" mt="xs">
+                    <Text size="sm" c="dimmed">Skill level</Text>
+                    <Text size="sm" fw={500}>{score}</Text>
+                  </Group>
+                  <Progress value={percentage} size="lg" radius="sm" mt="sm" />
+                </Paper>
+              );
+            })}
           </div>
-        )}
-      </div>
+        </section>
+      </Paper>
 
       <ContactCandidateModal
         isOpen={isModalOpen}
